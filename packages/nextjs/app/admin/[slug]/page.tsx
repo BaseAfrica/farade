@@ -82,6 +82,11 @@ const Admin = ({ params }: { params: { slug: string } }) => {
     });
     setCardWords([]);
   };
+  const handleAddCard = () => {
+    if (newWord === "") return;
+    setCardWords([...cardWords, encrypt(newWord)]);
+    setNewWord("");
+  };
   if (address !== admin) {
     return <p>You are not the admin</p>;
   }
@@ -185,14 +190,7 @@ const Admin = ({ params }: { params: { slug: string } }) => {
                   <InputBase value={newWord} onChange={setNewWord} placeholder="Word" />
                 </label>
                 <div className="text-end">
-                  <button
-                    onClick={() => {
-                      if (newWord === "") return;
-                      setCardWords([...cardWords, encrypt(newWord)]);
-                      setNewWord("");
-                    }}
-                    className="text-xs"
-                  >
+                  <button onClick={handleAddCard} className="text-xs">
                     + Add word
                   </button>
                 </div>

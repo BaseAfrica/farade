@@ -1,0 +1,68 @@
+
+š’dataSources:
+  - kind: ethereum/contract
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmfSUDBdcuaP16CidPUgsHEKgM4ouQHsh4cNiHJYnFurpA
+          name: CharadeGameFactory
+      apiVersion: 0.0.7
+      entities:
+        - GameDeployed
+      eventHandlers:
+        - event: 'GameDeployed(address,address,uint256,uint256)'
+          handler: handleGameDeployed
+      file:
+        /: /ipfs/Qmc2wT7sb7ZpSBTaEzd2WcpgtRzFJDTALxoZDjxA3Ah7Zy
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: CharadeGameFactory
+    network: localhost
+    source:
+      abi: CharadeGameFactory
+      address: '0x0165878A594ca255338adfa4d48449f69242Eb8F'
+description: Greetings
+repository: 'https://github.com/scaffold-eth/se-2/packages/subgraph/'
+schema:
+  file:
+    /: /ipfs/QmNvT7tFLBbkSCcYfG8BfhNB1FVVGv2tPdMuB3Ei2riDm1
+specVersion: 0.0.4
+templates:
+  - kind: ethereum/contract
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmZ5WdLAHykVKUQHu9p6QDyYbnLVprmNbqtcU5rWKQBuec
+          name: CharadeGame
+      apiVersion: 0.0.7
+      entities:
+        - RoundStarted
+        - WordChecked
+        - ScoreUpdated
+        - PlayerJoinedTeam
+        - GameStarted
+        - CardAdded
+      eventHandlers:
+        - event: 'RoundStarted(indexed uint256,uint256)'
+          handler: handleRoundStarted
+        - event: 'WordChecked(uint256,indexed address,string)'
+          handler: handleWordChecked
+        - event: 'ScoreUpdated(uint256,uint256,string)'
+          handler: handleScoreUpdated
+        - event: 'PlayerJoinedTeam(uint256,indexed address)'
+          handler: handlePlayerJoinedTeam
+        - event: GameStarted()
+          handler: handleGameStarted
+        - event: CardAdded()
+          handler: handleCardAdded
+        - event: 'TeamCreated(string,address[])'
+          handler: handleTeamCreated
+      file:
+        /: /ipfs/Qmc2wT7sb7ZpSBTaEzd2WcpgtRzFJDTALxoZDjxA3Ah7Zy
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: CharadeGameTemplate
+    network: localhost
+    source:
+      abi: CharadeGame
+’

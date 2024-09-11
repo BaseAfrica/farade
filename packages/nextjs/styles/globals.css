@@ -33,7 +33,7 @@ h4 {
 
 .card-inner {
   position: relative;
-  width: 180px;
+  width: 130px;
   height: 180px;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -46,7 +46,7 @@ h4 {
 .card-front,
 .card-back {
   position: absolute;
-  width: 180px;
+  width: 130px;
   height: 180px;
   backface-visibility: hidden;
 }

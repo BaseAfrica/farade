@@ -13,7 +13,6 @@ const GamePage: NextPage = () => {
   const [timer, setTimer] = useState<bigint>();
   const [scorePoint, setScorePoint] = useState<bigint>();
   const { createdGames, handleSetCurrentActiveGame } = useGame();
-  console.log(createdGames);
   const { writeContractAsync } = useScaffoldWriteContract("CharadeGameFactory");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +22,8 @@ const GamePage: NextPage = () => {
       functionName: "createGame",
       args: [address, timer, scorePoint],
     });
+    setTimer(undefined);
+    setScorePoint(undefined);
   };
   return (
     <div className="bg-black text-gray-300 min-h-screen p-8">

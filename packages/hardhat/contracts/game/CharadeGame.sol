@@ -49,6 +49,7 @@ contract CharadeGame {
 	event PlayerJoinedTeam(uint256 team, address indexed player);
 	event GameStarted();
 	event CardAdded();
+	event TeamCreated(string name, address[] members);
 	constructor(address _admin, uint256 _timeLimit, uint256 _scorePoint) {
 		admin = _admin;
 		TIME_LIMIT = _timeLimit;
@@ -92,6 +93,7 @@ contract CharadeGame {
 			activeTeamPlayer[totalTeams][members[i]] = true;
 		}
 		totalTeams++;
+		emit TeamCreated(name, members);
 	}
 
 	function addCard(string[] memory encryptedCardWords) public onlyAdmin {

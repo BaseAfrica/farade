@@ -25,9 +25,10 @@ const DisplayCards = () => {
               onClick={() => (admin === address ? handleAdminCardClick(index) : handlePlayerCardClick(index))}
             >
               <div className="card-inner ">
-                <div className="card-front flex justify-center bg-white/50 items-center border shadow-sm shadow-white rounded-xl">
-                  {index}
-                </div>
+                <div
+                  className="card-front bg-cardback bg-contain bg-center
+                 bg-no-repeat    shadow-sm shadow-white rounded-xl"
+                ></div>
                 <div className="card-back flex justify-center items-center border  shadow-sm shadow-white rounded-xl">
                   {card.word === "" ? decrypt(card.encryptedWord) : card.word}
                 </div>

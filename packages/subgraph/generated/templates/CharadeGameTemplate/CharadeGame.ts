@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt,
+  BigInt
 } from "@graphprotocol/graph-ts";
 
 export class CardAdded extends ethereum.Event {
@@ -108,6 +108,28 @@ export class ScoreUpdated__Params {
   }
 }
 
+export class TeamCreated extends ethereum.Event {
+  get params(): TeamCreated__Params {
+    return new TeamCreated__Params(this);
+  }
+}
+
+export class TeamCreated__Params {
+  _event: TeamCreated;
+
+  constructor(event: TeamCreated) {
+    this._event = event;
+  }
+
+  get name(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get members(): Array<Address> {
+    return this._event.parameters[1].value.toAddressArray();
+  }
+}
+
 export class WordChecked extends ethereum.Event {
   get params(): WordChecked__Params {
     return new WordChecked__Params(this);
@@ -146,7 +168,7 @@ export class CharadeGame__cardsResult {
     value1: string,
     value2: boolean,
     value3: BigInt,
-    value4: Address,
+    value4: Address
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -288,8 +310,8 @@ export class CharadeGame extends ethereum.SmartContract {
       "activeTeamPlayer(uint256,address):(bool)",
       [
         ethereum.Value.fromUnsignedBigInt(param0),
-        ethereum.Value.fromAddress(param1),
-      ],
+        ethereum.Value.fromAddress(param1)
+      ]
     );
 
     return result[0].toBoolean();
@@ -297,15 +319,15 @@ export class CharadeGame extends ethereum.SmartContract {
 
   try_activeTeamPlayer(
     param0: BigInt,
-    param1: Address,
+    param1: Address
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "activeTeamPlayer",
       "activeTeamPlayer(uint256,address):(bool)",
       [
         ethereum.Value.fromUnsignedBigInt(param0),
-        ethereum.Value.fromAddress(param1),
-      ],
+        ethereum.Value.fromAddress(param1)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -333,7 +355,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.call(
       "cards",
       "cards(uint256):(string,string,bool,uint256,address)",
-      [ethereum.Value.fromUnsignedBigInt(param0)],
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
     return new CharadeGame__cardsResult(
@@ -341,7 +363,7 @@ export class CharadeGame extends ethereum.SmartContract {
       result[1].toString(),
       result[2].toBoolean(),
       result[3].toBigInt(),
-      result[4].toAddress(),
+      result[4].toAddress()
     );
   }
 
@@ -349,7 +371,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.tryCall(
       "cards",
       "cards(uint256):(string,string,bool,uint256,address)",
-      [ethereum.Value.fromUnsignedBigInt(param0)],
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -361,14 +383,14 @@ export class CharadeGame extends ethereum.SmartContract {
         value[1].toString(),
         value[2].toBoolean(),
         value[3].toBigInt(),
-        value[4].toAddress(),
-      ),
+        value[4].toAddress()
+      )
     );
   }
 
   checkWord(cardId: BigInt): string {
     let result = super.call("checkWord", "checkWord(uint256):(string)", [
-      ethereum.Value.fromUnsignedBigInt(cardId),
+      ethereum.Value.fromUnsignedBigInt(cardId)
     ]);
 
     return result[0].toString();
@@ -376,7 +398,7 @@ export class CharadeGame extends ethereum.SmartContract {
 
   try_checkWord(cardId: BigInt): ethereum.CallResult<string> {
     let result = super.tryCall("checkWord", "checkWord(uint256):(string)", [
-      ethereum.Value.fromUnsignedBigInt(cardId),
+      ethereum.Value.fromUnsignedBigInt(cardId)
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -419,7 +441,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.call(
       "getAllCards",
       "getAllCards():((string,string,bool,uint256,address)[])",
-      [],
+      []
     );
 
     return result[0].toTupleArray<CharadeGame__getAllCardsResultValue0Struct>();
@@ -431,14 +453,14 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.tryCall(
       "getAllCards",
       "getAllCards():((string,string,bool,uint256,address)[])",
-      [],
+      []
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<CharadeGame__getAllCardsResultValue0Struct>(),
+      value[0].toTupleArray<CharadeGame__getAllCardsResultValue0Struct>()
     );
   }
 
@@ -446,7 +468,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.call(
       "getAllTeams",
       "getAllTeams():((string,address[],uint256)[])",
-      [],
+      []
     );
 
     return result[0].toTupleArray<CharadeGame__getAllTeamsResultValue0Struct>();
@@ -458,14 +480,14 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.tryCall(
       "getAllTeams",
       "getAllTeams():((string,address[],uint256)[])",
-      [],
+      []
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<CharadeGame__getAllTeamsResultValue0Struct>(),
+      value[0].toTupleArray<CharadeGame__getAllTeamsResultValue0Struct>()
     );
   }
 
@@ -473,7 +495,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.call(
       "hasCheckedWord",
       "hasCheckedWord(address):(bool)",
-      [ethereum.Value.fromAddress(param0)],
+      [ethereum.Value.fromAddress(param0)]
     );
 
     return result[0].toBoolean();
@@ -483,7 +505,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.tryCall(
       "hasCheckedWord",
       "hasCheckedWord(address):(bool)",
-      [ethereum.Value.fromAddress(param0)],
+      [ethereum.Value.fromAddress(param0)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -509,25 +531,25 @@ export class CharadeGame extends ethereum.SmartContract {
 
   teams(param0: BigInt): CharadeGame__teamsResult {
     let result = super.call("teams", "teams(uint256):(string,uint256)", [
-      ethereum.Value.fromUnsignedBigInt(param0),
+      ethereum.Value.fromUnsignedBigInt(param0)
     ]);
 
     return new CharadeGame__teamsResult(
       result[0].toString(),
-      result[1].toBigInt(),
+      result[1].toBigInt()
     );
   }
 
   try_teams(param0: BigInt): ethereum.CallResult<CharadeGame__teamsResult> {
     let result = super.tryCall("teams", "teams(uint256):(string,uint256)", [
-      ethereum.Value.fromUnsignedBigInt(param0),
+      ethereum.Value.fromUnsignedBigInt(param0)
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new CharadeGame__teamsResult(value[0].toString(), value[1].toBigInt()),
+      new CharadeGame__teamsResult(value[0].toString(), value[1].toBigInt())
     );
   }
 
@@ -550,7 +572,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.call(
       "wordCheckTime",
       "wordCheckTime(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)],
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
     return result[0].toBigInt();
@@ -560,7 +582,7 @@ export class CharadeGame extends ethereum.SmartContract {
     let result = super.tryCall(
       "wordCheckTime",
       "wordCheckTime(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)],
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();

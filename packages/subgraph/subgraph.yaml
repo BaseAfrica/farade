@@ -6,80 +6,27 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: CharadeGameFactory
-    network: optimism-sepolia
+    network: localhost
     source:
       abi: CharadeGameFactory
-      address: "0x18d828e16b6705c597ADC8d1e8d964D3A03021AF"
-      startBlock: 166237272
+      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - GameDeployed
       abis:
         - name: CharadeGameFactory
-          file: ./abis/optimismSepolia_CharadeGameFactory.json
+          file: ./abis/localhost_CharadeGameFactory.json
       eventHandlers:
         - event: GameDeployed(address,address,uint256,uint256)
           handler: handleGameDeployed
       file: ./src/mapping.ts
-  - kind: ethereum/contract
-    name: GovernorTimelock
-    network: optimism-sepolia
-    source:
-      abi: GovernorTimelock
-      address: "0xfA765FDbe4f6F960A017dB1fC61DF5c3D1De4f50"
-      startBlock: 16623753
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      entities:
-        - Timelock
-        - QueuedTransaction
-      abis:
-        - name: GovernorTimelock
-          file: ./abis/optimismSepolia_GovernorTimelock.json
-      eventHandlers:
-        - event: CallExecuted(indexed bytes32,indexed uint256,address,uint256,bytes)
-          handler: handleCallExecuted
-        - event: Cancelled(indexed bytes32)
-          handler: handleCancelled
-        - event: CallScheduled(indexed bytes32,indexed
-            uint256,address,uint256,bytes,bytes32,uint256)
-          handler: handleCallScheduled
-      file: ./src/governance.ts
-  - kind: ethereum/contract
-    name: BaseGovernor
-    network: optimism-sepolia
-    source:
-      abi: BaseGovernor
-      address: "0xe3c82ACaA90Cb34a80eeCb2cE8bA6f615724B837"
-      startBlock: 16623760
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      entities:
-        - Governor
-        - Proposal
-        - Vote
-      abis:
-        - name: BaseGovernor
-          file: ./abis/optimismSepolia_BaseGovernor.json
-      eventHandlers:
-        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
-          handler: handleProposalCreated
-        - event: ProposalExecuted(uint256)
-          handler: handleProposalExecuted
-        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
-          handler: handleVoteCast
-      file: ./src/governance.ts
 templates:
   - name: CharadeGameTemplate
     kind: ethereum/contract
-    network: optimism-sepolia
+    network: localhost
     source:
       abi: CharadeGame
     mapping:
@@ -95,7 +42,7 @@ templates:
         - CardAdded
       abis:
         - name: CharadeGame
-          file: ./abis/optimismSepolia_CharadeGame.json
+          file: ./abis/localhost_CharadeGame.json
       eventHandlers:
         - event: RoundStarted(indexed uint256,uint256)
           handler: handleRoundStarted
@@ -109,4 +56,6 @@ templates:
           handler: handleGameStarted
         - event: CardAdded()
           handler: handleCardAdded
+        - event: TeamCreated(string,address[])
+          handler: handleTeamCreated
       file: ./src/mapping.ts

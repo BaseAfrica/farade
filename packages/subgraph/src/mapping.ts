@@ -1,7 +1,7 @@
 import { GameDeployed } from "../generated/CharadeGameFactory/CharadeGameFactory";
 import { CharadeGameTemplate } from "../generated/templates";
 import { Game, Team, Card, Player } from "../generated/schema";
-import { BigInt } from "@graphprotocol/graph-ts";
+import { BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {
   RoundStarted,
   WordChecked,
@@ -9,6 +9,7 @@ import {
   PlayerJoinedTeam,
   GameStarted,
   CardAdded,
+  TeamCreated,
 } from "../generated/templates/CharadeGameTemplate/CharadeGame";
 
 export function handleGameDeployed(event: GameDeployed): void {
@@ -106,6 +107,27 @@ export function handleGameStarted(event: GameStarted): void {
   // Update the isGameStarted field
   game.isGameStarted = true;
   game.save();
+}
+// Handle TeamCreated event
+export function handleTeamCreated(event: TeamCreated): void {
+  // Create a new Team entity using the transaction hash as a unique ID
+  let team = new Team(event.transaction.hash.toHex());
+
+  // Set the team name from the event
+  team.name = event.params.name;
+
+  // Map the members addresses from the event and store them in the members field
+  let members = event.params.members;
+  let memberAddresses: Bytes[] = [];
+
+  for (let i = 0; i < members.length; i++) {
+    memberAddresses.push(members[i]);
+  }
+
+  team.members = memberAddresses;
+
+  // Save the Team entity
+  team.save();
 }
 
 export function handleCardAdded(event: CardAdded): void {

@@ -45,7 +45,7 @@ const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCreatedGames(
         gameData.games.map((game: Game, index: number) => ({
           ...game,
-          url: games[index].toString(),
+          url: games[index]?.toString(),
         })),
       );
     }
