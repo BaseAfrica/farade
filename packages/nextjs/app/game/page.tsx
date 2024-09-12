@@ -41,16 +41,16 @@ const GamePage: NextPage = () => {
         <div className="mt-6 bg-gray-800 rounded-md p-4 space-y-4">
           {/* Placeholder for leaderboard entries */}
           <div className="flex justify-between bg-gray-900 p-3 rounded-md">
-            <span className="text-gray-200">Player1</span>
-            <span className="text-gray-400">1000 points</span>
+            <span className="text-gray-200">Team1</span>
+            <span className="text-gray-400">100 points</span>
           </div>
           <div className="flex justify-between bg-gray-900 p-3 rounded-md">
-            <span className="text-gray-200">Player2</span>
-            <span className="text-gray-400">950 points</span>
+            <span className="text-gray-200">Team2</span>
+            <span className="text-gray-400">95 points</span>
           </div>
           <div className="flex justify-between bg-gray-900 p-3 rounded-md">
-            <span className="text-gray-200">Player3</span>
-            <span className="text-gray-400">900 points</span>
+            <span className="text-gray-200">Team3</span>
+            <span className="text-gray-400">70 points</span>
           </div>
         </div>
       </div>
