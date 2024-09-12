@@ -1,5 +1,5 @@
 
-Ä¼dataSources:
+š’dataSources:
   - kind: ethereum/contract
     mapping:
       abis:
@@ -13,7 +13,7 @@
         - event: 'GameDeployed(address,address,uint256,uint256)'
           handler: handleGameDeployed
       file:
-        /: /ipfs/Qmf19LegNMXehLN6kYzpDtTcVJgkqqjSq61pv1T2ZJT148
+        /: /ipfs/QmXAn6reVScKNupTCfy55vfu8uFfXHiUoQp7Z43s9p4ZGd
       kind: ethereum/events
       language: wasm/assemblyscript
     name: CharadeGameFactory
@@ -32,7 +32,7 @@ templates:
     mapping:
       abis:
         - file:
-            /: /ipfs/QmPBJKxHZPdYkNceQHtm5aAjPafxprrnZa2q5ZnE7vb6hr
+            /: /ipfs/QmZ5WdLAHykVKUQHu9p6QDyYbnLVprmNbqtcU5rWKQBuec
           name: CharadeGame
       apiVersion: 0.0.7
       entities:
@@ -55,12 +55,14 @@ templates:
           handler: handleGameStarted
         - event: CardAdded()
           handler: handleCardAdded
+        - event: 'TeamCreated(string,address[])'
+          handler: handleTeamCreated
       file:
-        /: /ipfs/Qmf19LegNMXehLN6kYzpDtTcVJgkqqjSq61pv1T2ZJT148
+        /: /ipfs/QmXAn6reVScKNupTCfy55vfu8uFfXHiUoQp7Z43s9p4ZGd
       kind: ethereum/events
       language: wasm/assemblyscript
     name: CharadeGameTemplate
     network: localhost
     source:
       abi: CharadeGame
-¼
+’

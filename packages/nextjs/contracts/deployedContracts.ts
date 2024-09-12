@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     CharadeGame: {
-      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           inputs: [
@@ -590,7 +590,684 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     CharadeGameFactory: {
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "gameAddress",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "admin",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timeLimit",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "scorePoint",
+              type: "uint256",
+            },
+          ],
+          name: "GameDeployed",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_admin",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "_timeLimit",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_scorePoint",
+              type: "uint256",
+            },
+          ],
+          name: "createGame",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "deployedGames",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getDeployedGames",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+  84532: {
+    CharadeGame: {
+      address: "0x878A50B35b5B823F8494F44002b83D9eAc25b153",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_admin",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "_timeLimit",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_scorePoint",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__CardAlreadyUsed",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__CardNotUsedYet",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__GameHasNotStarted",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__NotActiveTeam",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__NotAuthorized",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__NotPlayerOfActiveTeam",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__TeamDoesNotExist",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__WordAlreadyRevealed",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "CharadeGame__YouHaveAlreadyPlayed",
+          type: "error",
+        },
+        {
+          anonymous: false,
+          inputs: [],
+          name: "CardAdded",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [],
+          name: "GameStarted",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "team",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "player",
+              type: "address",
+            },
+          ],
+          name: "PlayerJoinedTeam",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "round",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "team",
+              type: "uint256",
+            },
+          ],
+          name: "RoundStarted",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "team",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "score",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "string",
+              name: "word",
+              type: "string",
+            },
+          ],
+          name: "ScoreUpdated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "address[]",
+              name: "members",
+              type: "address[]",
+            },
+          ],
+          name: "TeamCreated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "team",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "player",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "string",
+              name: "encryptedWord",
+              type: "string",
+            },
+          ],
+          name: "WordChecked",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "SCORE_POINT",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "TIME_LIMIT",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "activeTeamPlayer",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string[]",
+              name: "encryptedCardWords",
+              type: "string[]",
+            },
+          ],
+          name: "addCard",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "address[]",
+              name: "members",
+              type: "address[]",
+            },
+          ],
+          name: "addTeam",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "admin",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "cards",
+          outputs: [
+            {
+              internalType: "string",
+              name: "encryptedWord",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "word",
+              type: "string",
+            },
+            {
+              internalType: "bool",
+              name: "isUsed",
+              type: "bool",
+            },
+            {
+              internalType: "uint256",
+              name: "teamId",
+              type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "player",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "cardId",
+              type: "uint256",
+            },
+          ],
+          name: "checkWord",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "currentRound",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "currentTeam",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllCards",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "string",
+                  name: "encryptedWord",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "word",
+                  type: "string",
+                },
+                {
+                  internalType: "bool",
+                  name: "isUsed",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "teamId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "address",
+                  name: "player",
+                  type: "address",
+                },
+              ],
+              internalType: "struct CharadeGame.Card[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllTeams",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address[]",
+                  name: "members",
+                  type: "address[]",
+                },
+                {
+                  internalType: "uint256",
+                  name: "score",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct CharadeGame.Team[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "hasCheckedWord",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "isGameStarted",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "teamId",
+              type: "uint256",
+            },
+          ],
+          name: "joinTeam",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "teamId",
+              type: "uint256",
+            },
+          ],
+          name: "nextTeamTurn",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "stateGame",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "teams",
+          outputs: [
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "score",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalTeams",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "teamId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "cardId",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "guessedWord",
+              type: "string",
+            },
+          ],
+          name: "updateScore",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "wordCheckTime",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    CharadeGameFactory: {
+      address: "0x83EC7f2F4B9f50eB964ea181F09aF84a98418ece",
       abi: [
         {
           anonymous: false,

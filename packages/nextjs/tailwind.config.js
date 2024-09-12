@@ -81,6 +81,7 @@ module.exports = {
       },
       backgroundImage: {
         cardback: "url('/cardback.png')",
+        cardfront: "url('/cardfront.png')",
       },
       animation: {
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",

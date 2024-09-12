@@ -1,7 +1,7 @@
 import { GameDeployed } from "../generated/CharadeGameFactory/CharadeGameFactory";
 import { CharadeGameTemplate } from "../generated/templates";
 import { Game, Team, Card, Player } from "../generated/schema";
-import { BigInt, Bytes } from "@graphprotocol/graph-ts";
+import { BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import {
   RoundStarted,
   WordChecked,
@@ -73,7 +73,48 @@ export function handleScoreUpdated(event: ScoreUpdated): void {
   team.save();
 }
 
+export function handleGameStarted(event: GameStarted): void {
+  let game = Game.load(event.address.toHexString());
+  if (game == null) return;
+
+  // Update the isGameStarted field
+  game.isGameStarted = true;
+  game.save();
+}
+// Handle TeamCreated event
+// export function handleTeamCreated(event: TeamCreated): void {
+//   // Create a unique ID for the team using the transaction hash and log index
+//   let teamId =
+//     event.transaction.hash.toHexString() + "-" + event.logIndex.toString();
+//   let team = new Team(teamId);
+
+//   // Associate the team with the game by using the game address (event.address)
+//   let game = Game.load(event.address.toHexString());
+//   if (game == null) {
+//     return; // If the game doesn't exist, return early
+//   }
+//   team.game = game.id;
+
+//   // Set the team name from the event parameters
+//   team.name = event.params.name;
+
+//   // Initialize the members array with the provided members
+//   let memberAddresses: Bytes[] = [];
+//   for (let i = 0; i < event.params.members.length; i++) {
+//     let member = event.params.members[i];
+//     memberAddresses.push(member as Bytes); // Cast Address to Bytes
+//   }
+//   team.members = memberAddresses;
+
+//   // Initialize the team score
+//   team.score = BigInt.fromI32(0);
+
+//   // Save the team entity
+//   team.save();
+// }
+
 export function handlePlayerJoinedTeam(event: PlayerJoinedTeam): void {
+  // Ensure teamId matches the format used in Team creation
   let teamId = event.params.team.toString() + "-" + event.address.toHexString();
   let team = Team.load(teamId);
 
@@ -83,6 +124,7 @@ export function handlePlayerJoinedTeam(event: PlayerJoinedTeam): void {
     team.score = BigInt.fromI32(0);
   }
 
+  // Load or create the player
   let playerId = event.params.player.toHexString();
   let player = Player.load(playerId);
 
@@ -93,40 +135,12 @@ export function handlePlayerJoinedTeam(event: PlayerJoinedTeam): void {
     player.save();
   }
 
-  // Add the player to the team
+  // Add the player to the team’s members array
   let members = team.members;
   members.push(event.params.player);
   team.members = members;
-  team.save();
-}
 
-export function handleGameStarted(event: GameStarted): void {
-  let game = Game.load(event.address.toHexString());
-  if (game == null) return;
-
-  // Update the isGameStarted field
-  game.isGameStarted = true;
-  game.save();
-}
-// Handle TeamCreated event
-export function handleTeamCreated(event: TeamCreated): void {
-  // Create a new Team entity using the transaction hash as a unique ID
-  let team = new Team(event.transaction.hash.toHex());
-
-  // Set the team name from the event
-  team.name = event.params.name;
-
-  // Map the members addresses from the event and store them in the members field
-  let members = event.params.members;
-  let memberAddresses: Bytes[] = [];
-
-  for (let i = 0; i < members.length; i++) {
-    memberAddresses.push(members[i]);
-  }
-
-  team.members = memberAddresses;
-
-  // Save the Team entity
+  // Save the updated team
   team.save();
 }
 

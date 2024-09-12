@@ -8,7 +8,7 @@ import {
   store,
   Bytes,
   BigInt,
-  BigDecimal
+  BigDecimal,
 } from "@graphprotocol/graph-ts";
 
 export class GameDeployed extends Entity {
@@ -23,7 +23,7 @@ export class GameDeployed extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type GameDeployed must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type GameDeployed must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("GameDeployed", id.toString(), this);
     }
@@ -31,7 +31,7 @@ export class GameDeployed extends Entity {
 
   static loadInBlock(id: string): GameDeployed | null {
     return changetype<GameDeployed | null>(
-      store.get_in_block("GameDeployed", id)
+      store.get_in_block("GameDeployed", id),
     );
   }
 
@@ -117,7 +117,7 @@ export class Game extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Game must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Game must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Game", id.toString(), this);
     }
@@ -243,7 +243,7 @@ export class Team extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Team must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Team must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Team", id.toString(), this);
     }
@@ -339,7 +339,7 @@ export class Card extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Card must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Card must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Card", id.toString(), this);
     }
@@ -461,7 +461,7 @@ export class Player extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Player must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Player must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Player", id.toString(), this);
     }
@@ -527,7 +527,7 @@ export class RoundStarted extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RoundStarted must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RoundStarted must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RoundStarted", id.toString(), this);
     }
@@ -535,7 +535,7 @@ export class RoundStarted extends Entity {
 
   static loadInBlock(id: string): RoundStarted | null {
     return changetype<RoundStarted | null>(
-      store.get_in_block("RoundStarted", id)
+      store.get_in_block("RoundStarted", id),
     );
   }
 
@@ -595,7 +595,7 @@ export class WordChecked extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type WordChecked must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type WordChecked must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("WordChecked", id.toString(), this);
     }
@@ -603,7 +603,7 @@ export class WordChecked extends Entity {
 
   static loadInBlock(id: string): WordChecked | null {
     return changetype<WordChecked | null>(
-      store.get_in_block("WordChecked", id)
+      store.get_in_block("WordChecked", id),
     );
   }
 
@@ -676,7 +676,7 @@ export class ScoreUpdated extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ScoreUpdated must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type ScoreUpdated must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("ScoreUpdated", id.toString(), this);
     }
@@ -684,7 +684,7 @@ export class ScoreUpdated extends Entity {
 
   static loadInBlock(id: string): ScoreUpdated | null {
     return changetype<ScoreUpdated | null>(
-      store.get_in_block("ScoreUpdated", id)
+      store.get_in_block("ScoreUpdated", id),
     );
   }
 
@@ -757,7 +757,7 @@ export class PlayerJoinedTeam extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type PlayerJoinedTeam must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type PlayerJoinedTeam must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("PlayerJoinedTeam", id.toString(), this);
     }
@@ -765,13 +765,13 @@ export class PlayerJoinedTeam extends Entity {
 
   static loadInBlock(id: string): PlayerJoinedTeam | null {
     return changetype<PlayerJoinedTeam | null>(
-      store.get_in_block("PlayerJoinedTeam", id)
+      store.get_in_block("PlayerJoinedTeam", id),
     );
   }
 
   static load(id: string): PlayerJoinedTeam | null {
     return changetype<PlayerJoinedTeam | null>(
-      store.get("PlayerJoinedTeam", id)
+      store.get("PlayerJoinedTeam", id),
     );
   }
 
@@ -827,7 +827,7 @@ export class GameStarted extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type GameStarted must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type GameStarted must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("GameStarted", id.toString(), this);
     }
@@ -835,7 +835,7 @@ export class GameStarted extends Entity {
 
   static loadInBlock(id: string): GameStarted | null {
     return changetype<GameStarted | null>(
-      store.get_in_block("GameStarted", id)
+      store.get_in_block("GameStarted", id),
     );
   }
 
@@ -869,7 +869,7 @@ export class CardAdded extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type CardAdded must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type CardAdded must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("CardAdded", id.toString(), this);
     }

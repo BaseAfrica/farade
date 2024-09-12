@@ -12,7 +12,7 @@ const GamePage: NextPage = () => {
   // const [admin, setAdmin] = useState<string>("");
   const [timer, setTimer] = useState<bigint>();
   const [scorePoint, setScorePoint] = useState<bigint>();
-  const { createdGames, handleSetCurrentActiveGame } = useGame();
+  const { createdGames, fetchingGames, handleSetCurrentActiveGame } = useGame();
   const { writeContractAsync } = useScaffoldWriteContract("CharadeGameFactory");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -60,37 +60,45 @@ const GamePage: NextPage = () => {
         <h2 className="text-3xl font-semibold text-gray-200">Available Games</h2>
         <div className="mt-6 space-y-4">
           {/* Placeholder for available games */}
-          {createdGames.length ? (
-            <>
-              {createdGames.map((game, index) => (
-                <div key={index} className="bg-gray-800 p-4 rounded-md">
-                  <h3 className="text-2xl text-gray-200">Game {index + 1}</h3>
-                  <p className="text-gray-400">Status: Waiting for players</p>
-                  <div className="mt-4">
-                    {game.admin.toLowerCase() === address?.toString().toLowerCase() ? (
-                      <Link
-                        href={`/admin/${game.url}`}
-                        onClick={() => handleSetCurrentActiveGame(game.url)}
-                        className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
-                      >
-                        Manage Game
-                      </Link>
-                    ) : (
-                      <Link
-                        href={`/game/${game.url}`}
-                        onClick={() => handleSetCurrentActiveGame(game.url)}
-                        className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
-                      >
-                        Join Game
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </>
+          {fetchingGames ? (
+            <div className="flex items-center justify-center">
+              <span className="loading loading-bars loading-lg"></span>
+            </div>
           ) : (
             <>
-              <p>No game created yet</p>
+              {createdGames.length ? (
+                <>
+                  {createdGames.map((game, index) => (
+                    <div key={index} className="bg-gray-800 p-4 rounded-md">
+                      <h3 className="text-2xl text-gray-200">Game {index + 1}</h3>
+                      <p className="text-gray-400">Status: Waiting for players</p>
+                      <div className="mt-4">
+                        {game.admin.toLowerCase() === address?.toString().toLowerCase() ? (
+                          <Link
+                            href={`/admin/${game.url}`}
+                            onClick={() => handleSetCurrentActiveGame(game.url)}
+                            className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+                          >
+                            Manage Game
+                          </Link>
+                        ) : (
+                          <Link
+                            href={`/game/${game.url}`}
+                            onClick={() => handleSetCurrentActiveGame(game.url)}
+                            className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+                          >
+                            Join Game
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <p>No game created yet</p>
+                </>
+              )}
             </>
           )}
         </div>

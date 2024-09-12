@@ -1,5 +1,4 @@
-
-·R¯R[
+[
   {
     "inputs": [
       {
@@ -139,6 +138,25 @@
       }
     ],
     "name": "ScoreUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "members",
+        "type": "address[]"
+      }
+    ],
+    "name": "TeamCreated",
     "type": "event"
   },
   {
@@ -558,4 +576,4 @@
     "stateMutability": "view",
     "type": "function"
   }
-]¯R
+]

@@ -6,19 +6,20 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: CharadeGameFactory
-    network: localhost
+    network: base-testnet
     source:
       abi: CharadeGameFactory
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+      address: "0x83EC7f2F4B9f50eB964ea181F09aF84a98418ece"
+      startBlock: 15203473
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - GameDeployed
       abis:
         - name: CharadeGameFactory
-          file: ./abis/localhost_CharadeGameFactory.json
+          file: ./abis/baseSepolia_CharadeGameFactory.json
       eventHandlers:
         - event: GameDeployed(address,address,uint256,uint256)
           handler: handleGameDeployed
@@ -26,12 +27,12 @@ dataSources:
 templates:
   - name: CharadeGameTemplate
     kind: ethereum/contract
-    network: localhost
+    network: base-testnet
     source:
       abi: CharadeGame
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - RoundStarted
@@ -42,7 +43,7 @@ templates:
         - CardAdded
       abis:
         - name: CharadeGame
-          file: ./abis/localhost_CharadeGame.json
+          file: ./abis/baseSepolia_CharadeGame.json
       eventHandlers:
         - event: RoundStarted(indexed uint256,uint256)
           handler: handleRoundStarted

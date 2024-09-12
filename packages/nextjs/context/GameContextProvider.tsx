@@ -7,6 +7,7 @@ type GameContextType = {
   currentActiveGame: string | undefined;
   handleSetCurrentActiveGame: (game: string) => void;
   createdGames: Game[];
+  fetchingGames: boolean;
 };
 
 type Game = {
@@ -26,7 +27,7 @@ export const GameContext = createContext<GameContextType | null>(null);
 const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentActiveGame, setCurrentActiveGame] = useState<string | undefined>(undefined);
   const ALL_GAMES = gql(GET_ALL_GAMES);
-  const { data: gameData } = useQuery(ALL_GAMES);
+  const { data: gameData, loading: fetchingGames } = useQuery(ALL_GAMES);
 
   const [createdGames, setCreatedGames] = useState<Game[]>([]);
 
@@ -40,7 +41,7 @@ const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   useEffect(() => {
-    console.log(gameData);
+    console.log(fetchingGames);
     if (gameData && games && gameData.games) {
       setCreatedGames(
         gameData.games.map((game: Game, index: number) => ({
@@ -56,6 +57,7 @@ const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         currentActiveGame,
         handleSetCurrentActiveGame,
         createdGames,
+        fetchingGames,
       }}
     >
       {children}

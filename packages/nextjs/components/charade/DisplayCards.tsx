@@ -20,7 +20,7 @@ const DisplayCards = () => {
               role="button"
               key={index}
               className={`card transform transition duration-300  ${cards[index].isFlipped ? "flipped" : ""} ${
-                index % 2 === 0 ? " hover:rotate-180" : "hover:translate-x-4"
+                index % 2 === 0 ? " hover:rotate-[360deg]" : "hover:translate-x-4"
               }`}
               onClick={() => (admin === address ? handleAdminCardClick(index) : handlePlayerCardClick(index))}
             >
@@ -29,7 +29,10 @@ const DisplayCards = () => {
                   className="card-front bg-cardback bg-contain bg-center
                  bg-no-repeat    shadow-sm shadow-white rounded-xl"
                 ></div>
-                <div className="card-back flex justify-center items-center border  shadow-sm shadow-white rounded-xl">
+                <div
+                  className="card-back bg-cardfront  bg-contain bg-center
+                 bg-no-repeat   flex justify-center items-center border   rounded-xl"
+                >
                   {card.word === "" ? decrypt(card.encryptedWord) : card.word}
                 </div>
               </div>
